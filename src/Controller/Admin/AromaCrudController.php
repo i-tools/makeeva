@@ -46,7 +46,7 @@ class AromaCrudController extends BaseCrudController
                 $image->setColumns(6),
                 $slug->setColumns(6),
                 $content->setColumns(12),
-                FormField::addTab(t('SEO', [], 'admin.aromas')),
+//                FormField::addTab(t('SEO', [], 'admin.aromas')),
             ],
             default => [$title, $published, $planets, $createdAt, $updatedAt],
         };

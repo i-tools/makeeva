@@ -44,7 +44,7 @@ class PlanetCrudController extends BaseCrudController
                 $slug->setColumns(6),
                 $description->setColumns(12),
                 $content->setColumns(12),
-                FormField::addTab(t('SEO', [], 'admin.planets')),
+//                FormField::addTab(t('SEO', [], 'admin.planets')),
             ],
             default => [$title, $published, $createdAt, $updatedAt],
         };

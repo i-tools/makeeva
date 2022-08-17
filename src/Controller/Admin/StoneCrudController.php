@@ -46,7 +46,7 @@ class StoneCrudController extends BaseCrudController
                 $image->setColumns(6),
                 $slug->setColumns(6),
                 $content->setColumns(12),
-                FormField::addTab(t('SEO', [], 'admin.stones')),
+//                FormField::addTab(t('SEO', [], 'admin.stones')),
             ],
             default => [$title, $published, $planets, $createdAt, $updatedAt],
         };
