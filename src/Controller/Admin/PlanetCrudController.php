@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -28,6 +29,10 @@ class PlanetCrudController extends BaseCrudController
         $createdAt = DateField::new('createdAt', 'Created');
         $updatedAt = DateField::new('updatedAt', 'Updated');
         $title = TextField::new('title', t('Title', [], 'admin.planets'));
+        $image = ImageField::new('imageName', t('Image', [], 'admin.stones'))
+            ->setUploadDir($this->getParameter('app.planets.images.path'))
+            ->setBasePath($this->getParameter('app.planets.images.uri'))
+            ->setUploadedFileNamePattern("[slug]-[timestamp].[extension]");
         $slug = SlugField::new('slug', t('Slug', [], 'admin.planets'))
             ->setTargetFieldName('title')
         ;
@@ -41,6 +46,7 @@ class PlanetCrudController extends BaseCrudController
                 FormField::addTab(t('Basic', [], 'admin.planets')),
                 $published,
                 $title->setColumns(6),
+                $image->setColumns(6),
                 $slug->setColumns(6),
                 $description->setColumns(12),
                 $content->setColumns(12),
