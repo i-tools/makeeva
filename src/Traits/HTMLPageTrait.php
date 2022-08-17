@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Traits;
 
 use App\Entity\Aroma;
+use App\Entity\Planet;
+use App\Entity\Stone;
+use App\Interfaces\HTMLPageInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -32,7 +35,7 @@ trait HTMLPageTrait
 
     /**
      * @param bool $published
-     * @return Aroma|HTMLPageTrait
+     * @return Aroma|Planet|Stone|HTMLPageTrait
      */
     public function setPublished(bool $published): self
     {
@@ -51,7 +54,7 @@ trait HTMLPageTrait
 
     /**
      * @param string|null $title
-     * @return Aroma|HTMLPageTrait
+     * @return Aroma|Planet|Stone|HTMLPageTrait
      */
     public function setTitle(?string $title): self
     {
@@ -70,7 +73,7 @@ trait HTMLPageTrait
 
     /**
      * @param string|null $content
-     * @return Aroma|HTMLPageTrait
+     * @return Aroma|Planet|Stone|HTMLPageTrait
      */
     public function setContent(?string $content): self
     {
