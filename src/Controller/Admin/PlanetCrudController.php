@@ -28,7 +28,7 @@ class PlanetCrudController extends BaseCrudController
         $createdAt = DateField::new('createdAt', 'Created');
         $updatedAt = DateField::new('updatedAt', 'Updated');
         $title = TextField::new('title', t('Title', [], 'admin.planets'));
-        $slug = SlugField::new('slug', t('Slug', [], 'admin.traders'))
+        $slug = SlugField::new('slug', t('Slug', [], 'admin.planets'))
             ->setTargetFieldName('title')
         ;
         $description = CKEditorField::new('description', t('Description', [], 'admin.planets'))
