@@ -1,8 +1,16 @@
 # Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
 fos_ck_editor:
-    default_config: minimal_config
+    default_config: content_config
     configs:
-        eft_config:
+        description_config:
+            toolbar: [
+                [ 'Undo', 'Redo' ],
+                [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ],
+                [ 'Scayt' ]
+            ]
+        content_config:
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters: []
             toolbar: [
                 [ 'Undo', 'Redo' ],
                 [ 'Styles', 'Format' ],

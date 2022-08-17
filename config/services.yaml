@@ -4,6 +4,25 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    doctrine_behaviors_timestampable_date_field_type: "datetime"
+    app_dir: '%env(APP_DIR)%'
+
+    # Storage images folder
+    app.storage.path: '/public/storage'
+    app.storage.uri: '%app_dir%/storage/'
+    app.storage.cache_uri: '%app_dir%/storage/cache/'
+
+    # Planets image config
+    app.planets.images.path: '%app.storage.path%/images/planets'
+    app.planets.images.uri: '%app.storage.uri%/images/planets'
+
+    # Stones image config
+    app.stones.images.path: '%app.storage.path%/images/stones'
+    app.stones.images.uri: '%app.storage.uri%/images/stones'
+
+    # Aromas image config
+    app.aromas.images.path: '%app.storage.path%/images/aromas'
+    app.aromas.images.uri: '%app.storage.uri%/images/aromas'
 
 services:
     # default configuration for services in *this* file
