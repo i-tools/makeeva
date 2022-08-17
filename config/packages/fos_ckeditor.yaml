@@ -9,6 +9,8 @@ fos_ck_editor:
                 [ 'Scayt' ]
             ]
         content_config:
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters: []
             toolbar: [
                 [ 'Undo', 'Redo' ],
                 [ 'Styles', 'Format' ],
