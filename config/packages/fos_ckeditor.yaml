@@ -1,0 +1,18 @@
+# Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+fos_ck_editor:
+    default_config: minimal_config
+    configs:
+        eft_config:
+            toolbar: [
+                [ 'Undo', 'Redo' ],
+                [ 'Styles', 'Format' ],
+                [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ],
+                [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ],
+                [ 'Link', 'Unlink' ],
+                [ 'Image', 'Table' ],
+                [ 'Maximize' ],
+                [ 'Scayt' ]
+            ]
+twig:
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
