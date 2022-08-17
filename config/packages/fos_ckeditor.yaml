@@ -5,9 +5,7 @@ fos_ck_editor:
         description_config:
             toolbar: [
                 [ 'Undo', 'Redo' ],
-                [ 'Styles', 'Format' ],
                 [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ],
-                [ 'Maximize' ],
                 [ 'Scayt' ]
             ]
         content_config:
