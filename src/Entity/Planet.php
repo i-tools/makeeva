@@ -1,17 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Interfaces\PlanetInterface;
 use App\Repository\PlanetRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 use Knp\DoctrineBehaviors\Model\Timestampable\TimestampableTrait;
 
 #[ORM\Table(name: 'planets')]
 #[ORM\Index(columns: ['slug'], name: 'idx_planets_slug')]
 #[ORM\Entity(repositoryClass: PlanetRepository::class)]
-class Planet implements PlanetInterface
+#[ORM\HasLifecycleCallbacks]
+class Planet implements PlanetInterface, TimestampableInterface
 {
     use TimestampableTrait;
 
@@ -19,6 +23,9 @@ class Planet implements PlanetInterface
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $published;
 
     #[ORM\Column(length: 10)]
     private ?string $title = null;
@@ -83,5 +90,21 @@ class Planet implements PlanetInterface
         $this->slug = $slug;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPublished(): bool
+    {
+        return $this->published;
+    }
+
+    /**
+     * @param bool $published
+     */
+    public function setPublished(bool $published): void
+    {
+        $this->published = $published;
     }
 }
