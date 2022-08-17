@@ -7,7 +7,6 @@ namespace App\Traits;
 use App\Entity\Aroma;
 use App\Entity\Planet;
 use App\Entity\Stone;
-use App\Interfaces\HTMLPageInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -18,6 +17,9 @@ trait HTMLPageTrait
 
     #[ORM\Column(length: 10)]
     private ?string $title = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
@@ -66,6 +68,25 @@ trait HTMLPageTrait
     /**
      * @return string|null
      */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Aroma|Planet|Stone|HTMLPageTrait
+     */
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
@@ -92,7 +113,7 @@ trait HTMLPageTrait
 
     /**
      * @param string|null $slug
-     * @return Aroma|HTMLPageTrait
+     * @return Aroma|Planet|Stone|HTMLPageTrait
      */
     public function setSlug(?string $slug): self
     {
