@@ -7,6 +7,8 @@ namespace App\Interfaces;
 interface PlanetInterface
 {
     public function getId(): ?int;
+    public function isPublished(): bool;
+    public function setPublished(bool $published): void;
     public function getTitle(): ?string;
     public function setTitle(string $title): PlanetInterface;
     public function getDescription(): ?string;
