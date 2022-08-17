@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Admin;
 
 use App\Entity\Planet;
+use App\Entity\Stone;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -37,5 +38,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::section(t('Content', [], 'admin.menu'), '');
         yield MenuItem::linkToCrud(t('Planets', [], 'admin.menu'), 'fa fa-map', Planet::class)->setController(PlanetCrudController::class);
+        yield MenuItem::linkToCrud(t('Stones', [], 'admin.menu'), 'fa fa-map', Stone::class)->setController(StoneCrudController::class);
     }
 }
