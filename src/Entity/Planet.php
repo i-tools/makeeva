@@ -33,9 +33,6 @@ class Planet implements HTMLPageInterface, PlanetInterface, TimestampableInterfa
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $imageName = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
-
     #[ORM\OneToMany(mappedBy: 'planet', targetEntity: Stone::class, cascade: ['persist'], fetch: 'EXTRA_LAZY')]
     private Collection $stones;
 
@@ -62,18 +59,6 @@ class Planet implements HTMLPageInterface, PlanetInterface, TimestampableInterfa
     public function setImageName(?string $imageName): self
     {
         $this->imageName = $imageName;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): PlanetInterface
-    {
-        $this->description = $description;
 
         return $this;
     }
