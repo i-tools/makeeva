@@ -35,6 +35,9 @@ class AromaCrudController extends BaseCrudController
         $slug = SlugField::new('slug', t('Slug', [], 'admin.aromas'))
             ->setTargetFieldName('title')
         ;
+        $description = CKEditorField::new('description', t('Description', [], 'admin.planets'))
+            ->setFormTypeOption('config_name', 'description_config')
+        ;
         $content = CKEditorField::new('content', t('Content', [], 'admin.aromas'));
 
         return match ($pageName) {
@@ -45,6 +48,7 @@ class AromaCrudController extends BaseCrudController
                 $planets->setColumns(6),
                 $image->setColumns(6),
                 $slug->setColumns(6),
+                $description->setColumns(12),
                 $content->setColumns(12),
 //                FormField::addTab(t('SEO', [], 'admin.aromas')),
             ],
