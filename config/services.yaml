@@ -8,13 +8,17 @@ parameters:
     app_dir: '%env(APP_DIR)%'
 
     # Storage images folder
-    app.storage.path: '%kernel.project_dir%/public/storage/'
+    app.storage.path: '/public/storage'
     app.storage.uri: '%app_dir%/storage/'
     app.storage.cache_uri: '%app_dir%/storage/cache/'
 
     # Planets image config
-    app.planets.images.path: '%app.storage.path%images/traders'
-    app.planets.images.uri: '%app.storage.uri%images/traders'
+    app.planets.images.path: '%app.storage.path%/images/traders'
+    app.planets.images.uri: '%app.storage.uri%/images/traders'
+
+    # Stones image config
+    app.stones.images.path: '%app.storage.path%/images/stones'
+    app.stones.images.uri: '%app.storage.uri%/images/stones'
 
 services:
     # default configuration for services in *this* file
