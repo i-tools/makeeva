@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Interfaces\AromaInterface;
 use App\Interfaces\PlanetInterface;
 use App\Interfaces\StoneInterface;
 use App\Repository\PlanetRepository;
@@ -31,6 +32,9 @@ class Planet implements PlanetInterface, TimestampableInterface
 
     #[ORM\OneToMany(mappedBy: 'planet', targetEntity: Stone::class, cascade: ['persist'], fetch: 'EXTRA_LAZY')]
     private Collection $stones;
+
+    #[ORM\OneToMany(mappedBy: 'planet', targetEntity: Aroma::class, cascade: ['persist'], fetch: 'EXTRA_LAZY')]
+    private Collection $aromas;
 
     #[ORM\Column(length: 10)]
     private ?string $title = null;
@@ -67,10 +71,13 @@ class Planet implements PlanetInterface, TimestampableInterface
 
     /**
      * @param Collection $stones
+     * @return PlanetInterface
      */
-    public function setStones(Collection $stones): void
+    public function setStones(Collection $stones): PlanetInterface
     {
         $this->stones = $stones;
+
+        return $this;
     }
 
     /**
@@ -93,11 +100,60 @@ class Planet implements PlanetInterface, TimestampableInterface
      * @param StoneInterface $stone
      * @return PlanetInterface
      */
-    public function removeQuest(StoneInterface $stone): PlanetInterface
+    public function removeStone(StoneInterface $stone): PlanetInterface
     {
         if ($this->stones->contains($stone)) {
             $this->stones->removeElement($stone);
             $stone->setPlanet(null);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getAromas(): Collection
+    {
+        return $this->aromas;
+    }
+
+    /**
+     * @param Collection $aromas
+     * @return PlanetInterface
+     */
+    public function setAromas(Collection $aromas): PlanetInterface
+    {
+        $this->aromas = $aromas;
+
+        return $this;
+    }
+
+    /**
+     * @param AromaInterface ...$aromas
+     * @return PlanetInterface
+     */
+    public function addAroma(AromaInterface ...$aromas): PlanetInterface
+    {
+        foreach ($aromas as $aroma) {
+            if (!$this->aromas->contains($aroma)) {
+                $this->aromas->add($aroma);
+                $aroma->setPlanet($this);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param AromaInterface $aroma
+     * @return PlanetInterface
+     */
+    public function removeAroma(AromaInterface $aroma): PlanetInterface
+    {
+        if ($this->aromas->contains($aroma)) {
+            $this->aromas->removeElement($aroma);
+            $aroma->setPlanet(null);
         }
 
         return $this;
