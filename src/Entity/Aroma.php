@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Interfaces\AromaInterface;
+use App\Interfaces\GalleriedEntityInterface;
 use App\Interfaces\HTMLPageInterface;
 use App\Interfaces\PlanetInterface;
 use App\Repository\AromaRepository;
+use App\Traits\GalleriedEntityTrait;
 use App\Traits\HTMLPageTrait;
 use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 use Knp\DoctrineBehaviors\Model\Timestampable\TimestampableTrait;
@@ -14,17 +16,18 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'aromas')]
 #[ORM\Index(columns: ['slug'], name: 'idx_aromas_slug')]
 #[ORM\Entity(repositoryClass: AromaRepository::class)]
-class Aroma implements HTMLPageInterface, AromaInterface, TimestampableInterface
+class Aroma implements HTMLPageInterface, AromaInterface, GalleriedEntityInterface, TimestampableInterface
 {
     use TimestampableTrait;
     use HTMLPageTrait;
+    use GalleriedEntityTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(targetEntity: Planet::class, inversedBy: 'stones')]
+    #[ORM\ManyToOne(targetEntity: Planet::class, inversedBy: 'aromas')]
     private ?PlanetInterface $planet = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
