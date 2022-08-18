@@ -11,10 +11,10 @@ use App\Interfaces\StoneInterface;
 use App\Repository\PlanetRepository;
 use App\Traits\HTMLPageTrait;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 use Knp\DoctrineBehaviors\Model\Timestampable\TimestampableTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Table(name: 'planets')]
 #[ORM\Index(columns: ['slug'], name: 'idx_planets_slug')]
@@ -29,6 +29,15 @@ class Planet implements HTMLPageInterface, PlanetInterface, TimestampableInterfa
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    #[ORM\Column(length: 10)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2, max: 10,
+        minMessage: 'Field must be at least {{ limit }} characters long"',
+        maxMessage: 'Field cannot be longer than {{ limit }} characters'
+    )]
+    private ?string $title = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $imageName = null;
