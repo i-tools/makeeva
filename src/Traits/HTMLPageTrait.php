@@ -25,8 +25,7 @@ trait HTMLPageTrait
     )]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -82,10 +81,10 @@ trait HTMLPageTrait
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      * @return Aroma|Planet|Stone|HTMLPageTrait
      */
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
