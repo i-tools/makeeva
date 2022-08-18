@@ -24,6 +24,7 @@ class BaseCrudController extends AbstractCrudController
                 '@EasyAdmin/crud/form_theme.html.twig',
                 '@FOSCKEditor/Form/ckeditor_widget.html.twig',
             ])
-            ;
+            ->setSearchFields(['title', 'description', 'content'])
+        ;
     }
 }
