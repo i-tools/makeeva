@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Entity\GalleriedEntity;
+use App\Entity\GalleryEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<GalleriedEntity>
+ * @extends ServiceEntityRepository<GalleryEntity>
  *
- * @method GalleriedEntity|null find($id, $lockMode = null, $lockVersion = null)
- * @method GalleriedEntity|null findOneBy(array $criteria, array $orderBy = null)
- * @method GalleriedEntity[]    findAll()
- * @method GalleriedEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method GalleryEntity|null find($id, $lockMode = null, $lockVersion = null)
+ * @method GalleryEntity|null findOneBy(array $criteria, array $orderBy = null)
+ * @method GalleryEntity[]    findAll()
+ * @method GalleryEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GalleriedEntityRepository extends ServiceEntityRepository
+class GalleryEntityRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, GalleriedEntity::class);
+        parent::__construct($registry, GalleryEntity::class);
     }
 
-    public function add(GalleriedEntity $entity, bool $flush = false): void
+    public function add(GalleryEntity $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -32,7 +32,7 @@ class GalleriedEntityRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(GalleriedEntity $entity, bool $flush = false): void
+    public function remove(GalleryEntity $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
