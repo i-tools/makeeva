@@ -29,7 +29,7 @@ class PlanetCrudController extends BaseCrudController
         $createdAt = DateField::new('createdAt', 'Created');
         $updatedAt = DateField::new('updatedAt', 'Updated');
         $title = TextField::new('title', t('Title', [], 'admin.planets'));
-        $image = ImageField::new('imageName', t('Image', [], 'admin.stones'))
+        $image = ImageField::new('imageName', t('Image', [], 'admin.planets'))
             ->setUploadDir($this->getParameter('app.planets.images.path'))
             ->setBasePath($this->getParameter('app.planets.images.uri'))
             ->setUploadedFileNamePattern("[slug]-[timestamp].[extension]");
