@@ -9,6 +9,7 @@ use App\Interfaces\PlanetInterface;
 use App\Repository\AromaRepository;
 use App\Traits\GalleriedEntityTrait;
 use App\Traits\HTMLPageTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 use Knp\DoctrineBehaviors\Model\Timestampable\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -32,6 +33,11 @@ class Aroma implements HTMLPageInterface, AromaInterface, GalleriedEntityInterfa
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $imageName = null;
+
+    public function __construct()
+    {
+        $this->gallery = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
