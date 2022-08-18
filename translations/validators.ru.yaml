@@ -1,0 +1,2 @@
+Field must be at least {{ limit }} characters long: Поле должно содержать не менее {{ limit }} символов.
+Field cannot be longer than {{ limit }} characters: Поле не может быть длиннее {{ limit }} символов
