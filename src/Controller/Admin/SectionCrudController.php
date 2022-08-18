@@ -15,6 +15,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\DateTimeFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use function Symfony\Component\Translation\t;
 
 class SectionCrudController extends BaseCrudController
@@ -22,6 +25,15 @@ class SectionCrudController extends BaseCrudController
     public static function getEntityFqcn(): string
     {
         return Section::class;
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add(BooleanFilter::new('published', 'Статус пуликации'))
+            ->add(DatetimeFilter::new('createdAt', 'Дата создания'))
+            ->add(DatetimeFilter::new('updatedAt', 'Дата изменения'))
+            ;
     }
 
     public function configureFields(string $pageName): iterable

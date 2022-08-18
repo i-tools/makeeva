@@ -7,13 +7,15 @@ namespace App\Controller\Admin;
 use App\Entity\Planet;
 use App\Form\Field\CKEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\DateTimeFilter;
 use function Symfony\Component\Translation\t;
 
 class PlanetCrudController extends BaseCrudController
@@ -21,6 +23,15 @@ class PlanetCrudController extends BaseCrudController
     public static function getEntityFqcn(): string
     {
         return Planet::class;
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add(BooleanFilter::new('published', 'Статус пуликации'))
+            ->add(DatetimeFilter::new('createdAt', 'Дата создания'))
+            ->add(DatetimeFilter::new('updatedAt', 'Дата изменения'))
+            ;
     }
 
     public function configureFields(string $pageName): iterable
