@@ -13,10 +13,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 trait HTMLPageTrait
 {
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: Types::BOOLEAN)]
     private bool $published;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(
         min: 2, max: 255,
@@ -31,7 +31,7 @@ trait HTMLPageTrait
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $slug = null;
 
     /**
