@@ -5,10 +5,12 @@ namespace App\Controller\Admin;
 use App\Entity\Aroma;
 use App\Form\Field\CKEditorField;
 use App\Form\Filters\PlanetFilter;
+use App\Form\GalleryFormType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -54,6 +56,16 @@ class AromaCrudController extends BaseCrudController
         ;
         $content = CKEditorField::new('content', t('Content', [], 'admin.aromas'));
 
+        $gallery = CollectionField::new('gallery', t('Gallery', [], 'admin.stones'))
+            ->allowAdd()
+            ->allowDelete()
+            ->setEntryType(GalleryFormType::class)
+            ->setCustomOption('upload_dir', $this->getParameter('app.aromas.images.path'))
+//            ->setCustomOption('download_path', $this->getParameter('app.aromas.images.path'))
+            ->setEntryIsComplex(false)
+            ->setFormTypeOption('by_reference', false)
+        ;
+
         return match ($pageName) {
             Crud::PAGE_EDIT, Crud::PAGE_NEW => [
                 FormField::addTab(t('Basic', [], 'admin.aromas')),
@@ -65,6 +77,8 @@ class AromaCrudController extends BaseCrudController
                 $description->setColumns(12),
                 $content->setColumns(12),
 //                FormField::addTab(t('SEO', [], 'admin.aromas')),
+                FormField::addTab(t('Gallery', [], 'admin.stones')),
+                $gallery->setColumns(12)
             ],
             default => [$title, $published, $planets, $createdAt, $updatedAt],
         };

@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Interfaces\GalleriedEntityInterface;
 use App\Interfaces\HTMLPageInterface;
 use App\Interfaces\PlanetInterface;
 use App\Interfaces\StoneInterface;
 use App\Repository\StoneRepository;
+use App\Traits\GalleriedEntityTrait;
 use App\Traits\HTMLPageTrait;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 use Knp\DoctrineBehaviors\Model\Timestampable\TimestampableTrait;
@@ -16,10 +19,12 @@ use Knp\DoctrineBehaviors\Model\Timestampable\TimestampableTrait;
 #[ORM\Table(name: 'stones')]
 #[ORM\Index(columns: ['slug'], name: 'idx_stones_slug')]
 #[ORM\Entity(repositoryClass: StoneRepository::class)]
-class Stone implements HTMLPageInterface, StoneInterface, TimestampableInterface
+#[ORM\HasLifecycleCallbacks]
+class Stone implements HTMLPageInterface, GalleriedEntityInterface, StoneInterface, TimestampableInterface
 {
     use TimestampableTrait;
     use HTMLPageTrait;
+    use GalleriedEntityTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -31,6 +36,11 @@ class Stone implements HTMLPageInterface, StoneInterface, TimestampableInterface
 
     #[ORM\ManyToOne(targetEntity: Planet::class, inversedBy: 'stones')]
     private ?PlanetInterface $planet = null;
+
+    public function __construct()
+    {
+        $this->gallery = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {

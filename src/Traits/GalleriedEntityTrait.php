@@ -2,21 +2,15 @@
 
 namespace App\Traits;
 
+use App\Entity\Aroma;
 use App\Entity\Stone;
 use App\Interfaces\GalleryEntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Nette\Utils\Strings;
 
 trait GalleriedEntityTrait
 {
     private Collection $gallery;
-
-    public static function getEntityClass(): string
-    {
-        // By default, the translatable class has the same name but without the "Translation" suffix
-        return Strings::substring(static::class, 0, -11);
-    }
 
     /**
      * @return Collection
@@ -28,7 +22,7 @@ trait GalleriedEntityTrait
 
     /**
      * @param ArrayCollection $gallery
-     * @return GalleriedEntityTrait|Stone
+     * @return Aroma|Stone|GalleriedEntityTrait
      */
     public function setGallery(ArrayCollection $gallery): self
     {
@@ -39,7 +33,7 @@ trait GalleriedEntityTrait
 
     /**
      * @param GalleryEntityInterface $galleryEntity
-     * @return GalleriedEntityTrait|Stone
+     * @return Aroma|Stone|GalleriedEntityTrait
      */
     public function addGallery(GalleryEntityInterface $galleryEntity): self
     {
@@ -50,7 +44,7 @@ trait GalleriedEntityTrait
 
     /**
      * @param GalleryEntityInterface $galleryEntity
-     * @return GalleriedEntityTrait|Stone
+     * @return Aroma|Stone|GalleriedEntityTrait
      */
     public function removeGallery(GalleryEntityInterface $galleryEntity): self
     {

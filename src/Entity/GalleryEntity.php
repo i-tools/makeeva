@@ -26,12 +26,6 @@ class GalleryEntity implements GalleryEntityInterface
     #[ORM\Column(type: Types::STRING, length: 255, nullable: false)]
     private string $imageName;
 
-    public static function getEntityClass(): string
-    {
-        // By default, the translatable class has the same name but without the "Translation" suffix
-        return static::class;
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -78,43 +72,5 @@ class GalleryEntity implements GalleryEntityInterface
     public function __toString(): string
     {
         return $this->getImageName();
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getParentType(): ?string
-    {
-        return $this->parentType;
-    }
-
-    /**
-     * @param string $parentType
-     * @return GalleryEntity
-     */
-    public function setParentType(string $parentType): self
-    {
-        $this->parentType = $parentType;
-
-        return $this;
-    }
-
-    /**
-     * @return GalleriedEntityInterface
-     */
-    public function getParent(): GalleriedEntityInterface
-    {
-        return $this->parent;
-    }
-
-    /**
-     * @param GalleriedEntityInterface $parent
-     * @return GalleryEntity
-     */
-    public function setParent(GalleriedEntityInterface $parent): self
-    {
-        $this->parent = $parent;
-
-        return $this;
     }
 }
