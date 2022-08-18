@@ -9,16 +9,24 @@ use App\Entity\Planet;
 use App\Entity\Stone;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 trait HTMLPageTrait
 {
     #[ORM\Column(type: 'boolean')]
     private bool $published;
 
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2, max: 255,
+        minMessage: 'Field must be at least {{ limit }} characters long"',
+        maxMessage: 'Field cannot be longer than {{ limit }} characters'
+    )]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
