@@ -2,9 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Page;
 use App\Entity\Section;
 use App\Form\Field\CKEditorField;
 use App\Form\GalleryFormType;
+use App\Form\PageFormType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -50,6 +52,14 @@ class SectionCrudController extends BaseCrudController
         ;
         $content = CKEditorField::new('content', t('Content', [], 'admin.sections'));
 
+        $planets = CollectionField::new('pages', t('Pages planets', [], 'admin.sections'))
+            ->allowAdd()
+            ->allowDelete()
+            ->setEntryType(PageFormType::class)
+            ->setEntryIsComplex(false)
+            ->setFormTypeOption('by_reference', false)
+        ;
+
         return match ($pageName) {
             Crud::PAGE_EDIT, Crud::PAGE_NEW => [
                 FormField::addTab(t('Basic', [], 'admin.sections')),
@@ -58,6 +68,8 @@ class SectionCrudController extends BaseCrudController
                 $slug->setColumns(6),
                 $description->setColumns(12),
                 $content->setColumns(12),
+                FormField::addTab(t('Planet pages', [], 'admin.sections')),
+                $planets->setColumns(12),
             ],
             default => [$title, $published, $createdAt, $updatedAt],
         };
