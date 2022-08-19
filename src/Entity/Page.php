@@ -78,4 +78,8 @@ class Page implements PageInterface, HTMLPageInterface, TimestampableInterface
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->getTitle();
+    }
 }
