@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form;
 
 use App\Entity\GalleryEntity;
@@ -19,7 +21,10 @@ class GalleryFormType extends AbstractType
                 'upload_dir' => '',
                 'attr' => [
                     'class' => 'field-image'
-                ]
+                ],
+                'row_attr' => [
+                    'class' => 'field-image'
+                ],
 //                'uploadedFileNamePattern' => '[name].[extension]'
             ])
         ;
