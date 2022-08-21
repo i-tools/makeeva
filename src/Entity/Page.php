@@ -29,7 +29,6 @@ class Page implements PageInterface, HTMLPageInterface, TimestampableInterface
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Section $section = null;
 
-//    #[ORM\Column(type: Types::INTEGER, nullable: true)]
     #[ORM\ManyToOne(targetEntity: Planet::class, inversedBy: 'pages')]
     private ?Planet $planet = null;
 
@@ -48,6 +47,7 @@ class Page implements PageInterface, HTMLPageInterface, TimestampableInterface
     }
 
     /**
+     * @param SectionInterface|null $section
      * @return Page
      */
     public function setSection(?SectionInterface $section): self
@@ -63,6 +63,7 @@ class Page implements PageInterface, HTMLPageInterface, TimestampableInterface
     }
 
     /**
+     * @param Planet|null $planet
      * @return Page
      */
     public function setPlanet(?Planet $planet): self
