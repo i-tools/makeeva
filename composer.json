@@ -94,7 +94,12 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "check": [
+            "@cs"
+        ],
+        "cs": "vendor/bin/php-cs-fixer fix -v --diff --dry-run",
+        "cs-fix": "vendor/bin/php-cs-fixer fix -v --diff"
     },
     "conflict": {
         "symfony/symfony": "*"
