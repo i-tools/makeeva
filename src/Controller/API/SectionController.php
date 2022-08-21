@@ -94,7 +94,7 @@ class SectionController extends AbstractController
             'id' => $pageEntity->getId(),
             'title' => $pageEntity->getTitle(),
             'description' => $pageEntity->getDescription(),
-            'content' => $pageEntity->getContent()
+            'content' => $pageEntity->getContent(),
         ];
 
         return new JsonResponse([
