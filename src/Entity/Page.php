@@ -31,8 +31,9 @@ class Page implements PageInterface, HTMLPageInterface, TimestampableInterface
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Section $section = null;
 
-    #[ORM\Column(type: Types::INTEGER, nullable: true)]
-    private ?int $planet = null;
+//    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    #[ORM\ManyToOne(targetEntity: Planet::class, inversedBy: 'pages')]
+    private ?Planet $planet = null;
 
     public function __construct()
     {
@@ -60,18 +61,18 @@ class Page implements PageInterface, HTMLPageInterface, TimestampableInterface
     }
 
     /**
-     * @return int|null
+     * @return Planet|null
      */
-    public function getPlanet(): ?int
+    public function getPlanet(): ?Planet
     {
         return $this->planet;
     }
 
     /**
-     * @param int|null $planet
+     * @param Planet|null $planet
      * @return Page
      */
-    public function setPlanet(?int $planet): self
+    public function setPlanet(?Planet $planet): self
     {
         $this->planet = $planet;
 

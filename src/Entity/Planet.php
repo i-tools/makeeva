@@ -48,6 +48,9 @@ class Planet implements HTMLPageInterface, PlanetInterface, TimestampableInterfa
     #[ORM\OneToMany(mappedBy: 'planet', targetEntity: Aroma::class, cascade: ['persist'], fetch: 'EXTRA_LAZY')]
     private Collection $aromas;
 
+    #[ORM\OneToMany(mappedBy: 'planet', targetEntity: Page::class, cascade: ['persist'], fetch: 'EXTRA_LAZY')]
+    private Collection $pages;
+
     public function getId(): ?int
     {
         return $this->id;
