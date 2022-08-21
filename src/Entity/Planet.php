@@ -48,21 +48,20 @@ class Planet implements HTMLPageInterface, PlanetInterface, TimestampableInterfa
     #[ORM\OneToMany(mappedBy: 'planet', targetEntity: Aroma::class, cascade: ['persist'], fetch: 'EXTRA_LAZY')]
     private Collection $aromas;
 
+    #[ORM\OneToMany(mappedBy: 'planet', targetEntity: Page::class, cascade: ['persist'], fetch: 'EXTRA_LAZY')]
+    private Collection $pages;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getImageName(): ?string
     {
         return $this->imageName;
     }
 
     /**
-     * @param string|null $imageName
      * @return Planet
      */
     public function setImageName(?string $imageName): self
@@ -72,18 +71,11 @@ class Planet implements HTMLPageInterface, PlanetInterface, TimestampableInterfa
         return $this;
     }
 
-    /**
-     * @return Collection
-     */
     public function getStones(): Collection
     {
         return $this->stones;
     }
 
-    /**
-     * @param Collection $stones
-     * @return PlanetInterface
-     */
     public function setStones(Collection $stones): PlanetInterface
     {
         $this->stones = $stones;
@@ -91,10 +83,6 @@ class Planet implements HTMLPageInterface, PlanetInterface, TimestampableInterfa
         return $this;
     }
 
-    /**
-     * @param StoneInterface ...$stones
-     * @return PlanetInterface
-     */
     public function addStone(StoneInterface ...$stones): PlanetInterface
     {
         foreach ($stones as $stone) {
@@ -107,10 +95,6 @@ class Planet implements HTMLPageInterface, PlanetInterface, TimestampableInterfa
         return $this;
     }
 
-    /**
-     * @param StoneInterface $stone
-     * @return PlanetInterface
-     */
     public function removeStone(StoneInterface $stone): PlanetInterface
     {
         if ($this->stones->contains($stone)) {
@@ -121,18 +105,11 @@ class Planet implements HTMLPageInterface, PlanetInterface, TimestampableInterfa
         return $this;
     }
 
-    /**
-     * @return Collection
-     */
     public function getAromas(): Collection
     {
         return $this->aromas;
     }
 
-    /**
-     * @param Collection $aromas
-     * @return PlanetInterface
-     */
     public function setAromas(Collection $aromas): PlanetInterface
     {
         $this->aromas = $aromas;
@@ -140,10 +117,6 @@ class Planet implements HTMLPageInterface, PlanetInterface, TimestampableInterfa
         return $this;
     }
 
-    /**
-     * @param AromaInterface ...$aromas
-     * @return PlanetInterface
-     */
     public function addAroma(AromaInterface ...$aromas): PlanetInterface
     {
         foreach ($aromas as $aroma) {
@@ -156,10 +129,6 @@ class Planet implements HTMLPageInterface, PlanetInterface, TimestampableInterfa
         return $this;
     }
 
-    /**
-     * @param AromaInterface $aroma
-     * @return PlanetInterface
-     */
     public function removeAroma(AromaInterface $aroma): PlanetInterface
     {
         if ($this->aromas->contains($aroma)) {

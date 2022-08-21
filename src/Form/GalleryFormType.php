@@ -20,10 +20,10 @@ class GalleryFormType extends AbstractType
 //                'basePath' => '',
                 'upload_dir' => '',
                 'attr' => [
-                    'class' => 'field-image'
+                    'class' => 'field-image',
                 ],
                 'row_attr' => [
-                    'class' => 'field-image'
+                    'class' => 'field-image',
                 ],
 //                'uploadedFileNamePattern' => '[name].[extension]'
             ])

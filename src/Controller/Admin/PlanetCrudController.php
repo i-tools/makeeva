@@ -16,6 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\DateTimeFilter;
+
 use function Symfony\Component\Translation\t;
 
 class PlanetCrudController extends BaseCrudController
@@ -31,7 +32,7 @@ class PlanetCrudController extends BaseCrudController
             ->add(BooleanFilter::new('published', 'Статус пуликации'))
             ->add(DatetimeFilter::new('createdAt', 'Дата создания'))
             ->add(DatetimeFilter::new('updatedAt', 'Дата изменения'))
-            ;
+        ;
     }
 
     public function configureFields(string $pageName): iterable
@@ -43,7 +44,7 @@ class PlanetCrudController extends BaseCrudController
         $image = ImageField::new('imageName', t('Image', [], 'admin.planets'))
             ->setUploadDir($this->getParameter('app.planets.images.path'))
             ->setBasePath($this->getParameter('app.planets.images.uri'))
-            ->setUploadedFileNamePattern("[slug]-[timestamp].[extension]");
+            ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]');
         $slug = SlugField::new('slug', t('Slug', [], 'admin.planets'))
             ->setTargetFieldName('title')
         ;

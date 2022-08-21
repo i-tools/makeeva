@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Interfaces\GalleriedEntityInterface;
 use App\Interfaces\GalleryEntityInterface;
 use App\Repository\GalleryEntityRepository;
 use Doctrine\DBAL\Types\Types;
@@ -31,16 +30,12 @@ class GalleryEntity implements GalleryEntityInterface
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
     /**
-     * @param string|null $title
      * @return GalleryEntity
      */
     public function setTitle(?string $title): self
@@ -50,16 +45,12 @@ class GalleryEntity implements GalleryEntityInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getImageName(): string
     {
         return $this->imageName;
     }
 
     /**
-     * @param string $imageName
      * @return GalleryEntity
      */
     public function setImageName(string $imageName): self

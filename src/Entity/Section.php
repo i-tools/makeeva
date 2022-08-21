@@ -40,16 +40,12 @@ class Section implements SectionInterface, HTMLPageInterface, TimestampableInter
         return $this->id;
     }
 
-    /**
-     * @return Collection
-     */
     public function getPages(): Collection
     {
         return $this->pages;
     }
 
     /**
-     * @param Collection $pages
      * @return Section
      */
     public function setPages(Collection $pages): self

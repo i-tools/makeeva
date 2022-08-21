@@ -12,7 +12,7 @@ use Doctrine\Persistence\ObjectManager;
 
 final class GalleriedEventSubscriber implements EventSubscriberInterface
 {
-    const INTERFACE_FQNS = 'App\\Interfaces\\GalleriedEntityInterface';
+    public const INTERFACE_FQNS = 'App\\Interfaces\\GalleriedEntityInterface';
     private ?string $targetEntity = null;
 
     /**
@@ -23,8 +23,8 @@ final class GalleriedEventSubscriber implements EventSubscriberInterface
         $metaData = $loadClassMetadataEventArgs->getClassMetadata();
 
         if (!in_array(self::INTERFACE_FQNS, class_implements($metaData->getName()))) {
-        return;
-    }
+            return;
+        }
 
         $namingStrategy = $loadClassMetadataEventArgs
             ->getEntityManager()
@@ -33,28 +33,28 @@ final class GalleriedEventSubscriber implements EventSubscriberInterface
         ;
 
         $metaData->mapManyToMany([
-            'targetEntity'  => GalleryEntity::CLASS,
-            'fieldName'     => 'gallery',
-            'cascade'       => array('persist'),
-            'joinTable'     => array(
-                'name'        => strtolower($namingStrategy->classToTableName($metaData->getName())) . 's_gallery',
-                'joinColumns' => array(
-                    array(
-                        'name'                  => $namingStrategy->joinKeyColumnName($metaData->getName()),
-                        'referencedColumnName'  => $namingStrategy->referenceColumnName(),
-                        'onDelete'  => 'CASCADE',
-                        'onUpdate'  => 'CASCADE',
-                    ),
-                ),
-                'inverseJoinColumns'    => array(
-                    array(
-                        'name'                  => 'gallery_id',
-                        'referencedColumnName'  => $namingStrategy->referenceColumnName(),
-                        'onDelete'  => 'CASCADE',
-                        'onUpdate'  => 'CASCADE',
-                    ),
-                )
-            )
+            'targetEntity' => GalleryEntity::class,
+            'fieldName' => 'gallery',
+            'cascade' => ['persist'],
+            'joinTable' => [
+                'name' => strtolower($namingStrategy->classToTableName($metaData->getName())).'s_gallery',
+                'joinColumns' => [
+                    [
+                        'name' => $namingStrategy->joinKeyColumnName($metaData->getName()),
+                        'referencedColumnName' => $namingStrategy->referenceColumnName(),
+                        'onDelete' => 'CASCADE',
+                        'onUpdate' => 'CASCADE',
+                    ],
+                ],
+                'inverseJoinColumns' => [
+                    [
+                        'name' => 'gallery_id',
+                        'referencedColumnName' => $namingStrategy->referenceColumnName(),
+                        'onDelete' => 'CASCADE',
+                        'onUpdate' => 'CASCADE',
+                    ],
+                ],
+            ],
         ]);
     }
 
@@ -76,7 +76,7 @@ final class GalleriedEventSubscriber implements EventSubscriberInterface
         $this->targetEntity = $classMetadataInfo->reflClass->getName();
 
         $classMetadataInfo->mapOneToMany([
-            'targetEntity' => GalleryEntity::CLASS,
+            'targetEntity' => GalleryEntity::class,
             'mappedBy' => 'parent',
             'fieldName' => 'gallery',
             'indexedBy' => 'parent_type',
@@ -103,7 +103,7 @@ final class GalleriedEventSubscriber implements EventSubscriberInterface
                         'name' => 'parent_id',
                         'referencedColumnName' => $singleIdentifierFieldName,
                         'onDelete' => 'CASCADE',
-                    ]
+                    ],
                 ],
                 'targetEntity' => $this->targetEntity,
             ]);

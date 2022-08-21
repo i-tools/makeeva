@@ -14,15 +14,15 @@ parameters:
 
     # Planets image config
     app.planets.images.path: '%app.storage.path%/images/planets'
-    app.planets.images.uri: '%app.storage.uri%/images/planets'
+    app.planets.images.uri: '%app.storage.uri%images/planets'
 
     # Stones image config
     app.stones.images.path: '%app.storage.path%/images/stones'
-    app.stones.images.uri: '%app.storage.uri%/images/stones'
+    app.stones.images.uri: '%app.storage.uri%images/stones'
 
     # Aromas image config
     app.aromas.images.path: '%app.storage.path%/images/aromas'
-    app.aromas.images.uri: '%app.storage.uri%/images/aromas'
+    app.aromas.images.uri: '%app.storage.uri%images/aromas'
 
 services:
     # default configuration for services in *this* file
