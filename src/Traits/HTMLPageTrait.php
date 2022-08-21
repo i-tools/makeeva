@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Traits;
 
 use App\Entity\Aroma;
+use App\Entity\Page;
 use App\Entity\Planet;
+use App\Entity\Section;
 use App\Entity\Stone;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -34,17 +36,13 @@ trait HTMLPageTrait
     #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $slug = null;
 
-    /**
-     * @return bool
-     */
     public function isPublished(): bool
     {
         return $this->published;
     }
 
     /**
-     * @param bool $published
-     * @return Aroma|Planet|Stone|HTMLPageTrait
+     * @return Aroma|Page|Planet|Section|Stone|HTMLPageTrait
      */
     public function setPublished(bool $published): self
     {
@@ -53,17 +51,13 @@ trait HTMLPageTrait
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
     /**
-     * @param string|null $title
-     * @return Aroma|Planet|Stone|HTMLPageTrait
+     * @return Aroma|Page|Planet|Section|Stone|HTMLPageTrait
      */
     public function setTitle(?string $title): self
     {
@@ -72,17 +66,13 @@ trait HTMLPageTrait
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * @param string|null $description
-     * @return Aroma|Planet|Stone|HTMLPageTrait
+     * @return Aroma|Page|Planet|Section|Stone|HTMLPageTrait
      */
     public function setDescription(?string $description): self
     {
@@ -91,17 +81,13 @@ trait HTMLPageTrait
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
     /**
-     * @param string|null $content
-     * @return Aroma|Planet|Stone|HTMLPageTrait
+     * @return Aroma|Page|Planet|Section|Stone|HTMLPageTrait
      */
     public function setContent(?string $content): self
     {
@@ -110,17 +96,13 @@ trait HTMLPageTrait
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
     /**
-     * @param string|null $slug
-     * @return Aroma|Planet|Stone|HTMLPageTrait
+     * @return Aroma|Page|Planet|Section|Stone|HTMLPageTrait
      */
     public function setSlug(?string $slug): self
     {

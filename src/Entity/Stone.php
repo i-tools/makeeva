@@ -47,18 +47,11 @@ class Stone implements HTMLPageInterface, GalleriedEntityInterface, StoneInterfa
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getImageName(): ?string
     {
         return $this->imageName;
     }
 
-    /**
-     * @param string|null $imageName
-     * @return StoneInterface
-     */
     public function setImageName(?string $imageName): StoneInterface
     {
         $this->imageName = $imageName;
@@ -66,18 +59,11 @@ class Stone implements HTMLPageInterface, GalleriedEntityInterface, StoneInterfa
         return $this;
     }
 
-    /**
-     * @return PlanetInterface|null
-     */
     public function getPlanet(): ?PlanetInterface
     {
         return $this->planet;
     }
 
-    /**
-     * @param PlanetInterface|null $planet
-     * @return StoneInterface
-     */
     public function setPlanet(?PlanetInterface $planet): StoneInterface
     {
         $this->planet = $planet;

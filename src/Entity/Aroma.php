@@ -12,9 +12,9 @@ use App\Repository\AromaRepository;
 use App\Traits\GalleriedEntityTrait;
 use App\Traits\HTMLPageTrait;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
 use Knp\DoctrineBehaviors\Model\Timestampable\TimestampableTrait;
-use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'aromas')]
 #[ORM\Index(columns: ['slug'], name: 'idx_aromas_slug')]
@@ -46,9 +46,6 @@ class Aroma implements HTMLPageInterface, AromaInterface, GalleriedEntityInterfa
         return $this->id;
     }
 
-    /**
-     * @return PlanetInterface|null
-     */
     public function getPlanet(): ?PlanetInterface
     {
         return $this->planet;
@@ -65,9 +62,6 @@ class Aroma implements HTMLPageInterface, AromaInterface, GalleriedEntityInterfa
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getImageName(): ?string
     {
         return $this->imageName;

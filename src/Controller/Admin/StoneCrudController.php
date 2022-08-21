@@ -7,6 +7,7 @@ use App\Form\Field\CKEditorField;
 use App\Form\Filters\PlanetFilter;
 use App\Form\GalleryFormType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
@@ -15,9 +16,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\DateTimeFilter;
+
 use function Symfony\Component\Translation\t;
 
 class StoneCrudController extends BaseCrudController
@@ -27,7 +28,7 @@ class StoneCrudController extends BaseCrudController
         return Stone::class;
     }
 
-    public function configureFilters(Filters$filters): Filters
+    public function configureFilters(Filters $filters): Filters
     {
         return $filters
             ->add(BooleanFilter::new('published', 'Статус пуликации'))
@@ -45,7 +46,7 @@ class StoneCrudController extends BaseCrudController
         $image = ImageField::new('imageName', t('Image', [], 'admin.stones'))
             ->setUploadDir($this->getParameter('app.stones.images.path'))
             ->setBasePath($this->getParameter('app.stones.images.uri'))
-            ->setUploadedFileNamePattern("[slug]-[timestamp].[extension]");
+            ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]');
         $planets = AssociationField::new('planet', t('Planet', [], 'admin.stones'));
         $title = TextField::new('title', t('Title', [], 'admin.stones'));
         $slug = SlugField::new('slug', t('Slug', [], 'admin.stones'))
@@ -77,7 +78,7 @@ class StoneCrudController extends BaseCrudController
                 $content->setColumns(12),
 //                FormField::addTab(t('SEO', [], 'admin.stones')),
                 FormField::addTab(t('Gallery', [], 'admin.stones')),
-                $gallery->setColumns(12)
+                $gallery->setColumns(12),
             ],
             default => [$title, $published, $planets, $createdAt, $updatedAt],
         };

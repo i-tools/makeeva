@@ -2,24 +2,20 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Page;
 use App\Entity\Section;
 use App\Form\Field\CKEditorField;
-use App\Form\GalleryFormType;
 use App\Form\PageFormType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\DateTimeFilter;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+
 use function Symfony\Component\Translation\t;
 
 class SectionCrudController extends BaseCrudController
@@ -35,7 +31,7 @@ class SectionCrudController extends BaseCrudController
             ->add(BooleanFilter::new('published', 'Статус пуликации'))
             ->add(DatetimeFilter::new('createdAt', 'Дата создания'))
             ->add(DatetimeFilter::new('updatedAt', 'Дата изменения'))
-            ;
+        ;
     }
 
     public function configureFields(string $pageName): iterable

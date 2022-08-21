@@ -6,11 +6,9 @@ namespace App\Entity;
 
 use App\Interfaces\HTMLPageInterface;
 use App\Interfaces\PageInterface;
-use App\Interfaces\PlanetInterface;
 use App\Interfaces\SectionInterface;
 use App\Repository\PageRepository;
 use App\Traits\HTMLPageTrait;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
@@ -31,8 +29,9 @@ class Page implements PageInterface, HTMLPageInterface, TimestampableInterface
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?Section $section = null;
 
-    #[ORM\Column(type: Types::INTEGER, nullable: true)]
-    private ?int $planet = null;
+//    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    #[ORM\ManyToOne(targetEntity: Planet::class, inversedBy: 'pages')]
+    private ?Planet $planet = null;
 
     public function __construct()
     {
@@ -49,7 +48,6 @@ class Page implements PageInterface, HTMLPageInterface, TimestampableInterface
     }
 
     /**
-     * @param SectionInterface|null $section
      * @return Page
      */
     public function setSection(?SectionInterface $section): self
@@ -59,19 +57,15 @@ class Page implements PageInterface, HTMLPageInterface, TimestampableInterface
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getPlanet(): ?int
+    public function getPlanet(): ?Planet
     {
         return $this->planet;
     }
 
     /**
-     * @param int|null $planet
      * @return Page
      */
-    public function setPlanet(?int $planet): self
+    public function setPlanet(?Planet $planet): self
     {
         $this->planet = $planet;
 
@@ -81,5 +75,10 @@ class Page implements PageInterface, HTMLPageInterface, TimestampableInterface
     public function __toString(): string
     {
         return $this->getTitle();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 }
