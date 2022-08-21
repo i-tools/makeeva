@@ -1,21 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\API;
 
 use App\Entity\Planet;
-use App\Exception\PlanetNotFoundException;
-use App\Interfaces\PageInterface;
-use App\Interfaces\PlanetInterface;
 use App\Repository\PlanetRepository;
-use App\Repository\SectionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PlanetsController extends AbstractController
+class PlanetController extends AbstractController
 {
-    #[Route('/api/planet/list', name: 'api_planets_list', methods: ['GET', 'HEAD'])]
+    #[Route('/api/planets/list', name: 'api_planets_list', methods: ['GET', 'HEAD'])]
     public function planetsList(PlanetRepository $planetRepository): JsonResponse
     {
         $result = [];
@@ -28,6 +26,7 @@ class PlanetsController extends AbstractController
                 'image' => ($planet->getImageName()) ? $this->getParameter('app.planets.images.uri') . $planet->getImageName() : null,
                 'slug' => $planet->getSlug(),
                 'description' => $planet->getDescription(),
+                'api_link' => '/api/planets/' . $planet->getId()
             ];
         }
 
@@ -37,7 +36,7 @@ class PlanetsController extends AbstractController
         ]);
     }
 
-    #[Route('/api/planet/{id}', name: 'api_get_planet_by_id', methods: ['GET', 'HEAD'])]
+    #[Route('/api/planets/{id}', name: 'api_get_planet_by_id', methods: ['GET', 'HEAD'])]
     public function getPlanetById(PlanetRepository $planetRepository, int $id): JsonResponse
     {
         /** @var Planet $planet */

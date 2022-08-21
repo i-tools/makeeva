@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\API;
 
 use App\Interfaces\PageInterface;
@@ -9,9 +11,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class RoutesController extends AbstractController
+class SectionController extends AbstractController
 {
-    #[Route('/api/routes', name: 'app_api_routes')]
+    #[Route('/api/sections/list', name: 'app_api_routes')]
     public function index(SectionRepository $sectionRepository): JsonResponse
     {
         $result = [];
@@ -22,7 +24,7 @@ class RoutesController extends AbstractController
             $section = [
                 'id' => $route->getId(),
                 'title' => $route->getTitle(),
-                'slug' => '/' . $route->getSlug(),
+                'link' => '/' . $route->getSlug(),
             ];
 
             if ($subPages = $route->getPages()) {
@@ -32,7 +34,7 @@ class RoutesController extends AbstractController
                         'id' => $page->getId(),
                         'planet_id' => $page->getPlanet()->getId(),
                         'title' => $page->getTitle(),
-                        'slug' => '/' . $route->getSlug() . '/' . $page->getPlanet()->getSlug(),
+                        'link' => '/' . $route->getSlug() . '/' . $page->getPlanet()->getSlug(),
                     ];
                 }
             }
