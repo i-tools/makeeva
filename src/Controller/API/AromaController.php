@@ -22,15 +22,17 @@ class AromaController extends AbstractController
         $aromas = $aromaRepository->findAll();
 
         foreach ($aromas as $aroma) {
-            if (!$aroma->isPublished()) continue;
+            if (!$aroma->isPublished()) {
+                continue;
+            }
             $itemResult = [
                 'id' => $aroma->getId(),
                 'title' => $aroma->getTitle(),
-                'image' => ($aroma->getImageName()) ? $this->getParameter('app.stones.images.uri') . $aroma->getImageName() : null,
+                'image' => ($aroma->getImageName()) ? $this->getParameter('app.stones.images.uri').$aroma->getImageName() : null,
                 'slug' => $aroma->getSlug(),
                 'description' => $aroma->getDescription(),
                 'planet' => null,
-                'api_link' => '/api/aromas/' . $aroma->getId()
+                'api_link' => '/api/aromas/'.$aroma->getId(),
             ];
             /** @var PlanetInterface $planet */
             $planet = $aroma->getPlanet();
@@ -38,7 +40,7 @@ class AromaController extends AbstractController
                 $itemResult['planet'] = [
                     'id' => $planet->getId(),
                     'title' => $planet->getTitle(),
-                    'api_link' => '/api/planets/' . $planet->getId()
+                    'api_link' => '/api/planets/'.$planet->getId(),
                 ];
             }
             $aromasResult[] = $itemResult;
@@ -46,7 +48,7 @@ class AromaController extends AbstractController
 
         return new JsonResponse([
             'status' => Response::HTTP_OK,
-            'planets' => $aromasResult
+            'planets' => $aromasResult,
         ]);
     }
 
@@ -59,10 +61,10 @@ class AromaController extends AbstractController
         $result = [
             'id' => $aroma->getId(),
             'title' => $aroma->getTitle(),
-            'image' => ($aroma->getImageName()) ? $this->getParameter('app.stones.images.uri') . $aroma->getImageName() : null,
+            'image' => ($aroma->getImageName()) ? $this->getParameter('app.stones.images.uri').$aroma->getImageName() : null,
             'slug' => $aroma->getSlug(),
             'description' => $aroma->getDescription(),
-            "content" => $aroma->getContent()
+            'content' => $aroma->getContent(),
         ];
 
         /** @var PlanetInterface $planet */
@@ -71,7 +73,7 @@ class AromaController extends AbstractController
             $result['planet'] = [
                 'id' => $planet->getId(),
                 'title' => $planet->getTitle(),
-                'api_link' => '/api/planets/' . $planet->getId()
+                'api_link' => '/api/planets/'.$planet->getId(),
             ];
         }
 
@@ -80,14 +82,14 @@ class AromaController extends AbstractController
             foreach ($gallery as $photo) {
                 $result['gallery'][] = [
                     'title' => $photo->getImageName(),
-                    'image' => $this->getParameter('app.aromas.images.uri') . '/' . $photo->getImageName(),
+                    'image' => $this->getParameter('app.aromas.images.uri').'/'.$photo->getImageName(),
                 ];
             }
         }
 
         return new JsonResponse([
             'status' => Response::HTTP_OK,
-            'planet' => $result
+            'planet' => $result,
         ]);
     }
 }

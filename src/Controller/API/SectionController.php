@@ -20,11 +20,13 @@ class SectionController extends AbstractController
         $routes = $sectionRepository->findAll();
 
         foreach ($routes as $route) {
-            if (!$route->isPublished()) continue;
+            if (!$route->isPublished()) {
+                continue;
+            }
             $section = [
                 'id' => $route->getId(),
                 'title' => $route->getTitle(),
-                'link' => '/' . $route->getSlug(),
+                'link' => '/'.$route->getSlug(),
             ];
 
             if ($subPages = $route->getPages()) {
@@ -34,7 +36,7 @@ class SectionController extends AbstractController
                         'id' => $page->getId(),
                         'planet_id' => $page->getPlanet()->getId(),
                         'title' => $page->getTitle(),
-                        'link' => '/' . $route->getSlug() . '/' . $page->getPlanet()->getSlug(),
+                        'link' => '/'.$route->getSlug().'/'.$page->getPlanet()->getSlug(),
                     ];
                 }
             }
@@ -43,7 +45,7 @@ class SectionController extends AbstractController
 
         return new JsonResponse([
             'status' => Response::HTTP_OK,
-            'routes' => $result
+            'routes' => $result,
         ]);
     }
 }

@@ -18,6 +18,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\BooleanFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\DateTimeFilter;
+
 use function Symfony\Component\Translation\t;
 
 class AromaCrudController extends BaseCrudController
@@ -27,14 +28,14 @@ class AromaCrudController extends BaseCrudController
         return Aroma::class;
     }
 
-    public function configureFilters(Filters$filters): Filters
+    public function configureFilters(Filters $filters): Filters
     {
         return $filters
             ->add(BooleanFilter::new('published', 'Статус пуликации'))
             ->add(PlanetFilter::new('planet', 'Планета'))
             ->add(DatetimeFilter::new('createdAt', 'Дата создания'))
             ->add(DatetimeFilter::new('updatedAt', 'Дата изменения'))
-            ;
+        ;
     }
 
     public function configureFields(string $pageName): iterable
@@ -45,7 +46,7 @@ class AromaCrudController extends BaseCrudController
         $image = ImageField::new('imageName', t('Image', [], 'admin.aromas'))
             ->setUploadDir($this->getParameter('app.aromas.images.path'))
             ->setBasePath($this->getParameter('app.aromas.images.uri'))
-            ->setUploadedFileNamePattern("[slug]-[timestamp].[extension]");
+            ->setUploadedFileNamePattern('[slug]-[timestamp].[extension]');
         $planets = AssociationField::new('planet', t('Planet', [], 'admin.aromas'));
         $title = TextField::new('title', t('Title', [], 'admin.aromas'));
         $slug = SlugField::new('slug', t('Slug', [], 'admin.aromas'))
@@ -78,7 +79,7 @@ class AromaCrudController extends BaseCrudController
                 $content->setColumns(12),
 //                FormField::addTab(t('SEO', [], 'admin.aromas')),
                 FormField::addTab(t('Gallery', [], 'admin.stones')),
-                $gallery->setColumns(12)
+                $gallery->setColumns(12),
             ],
             default => [$title, $published, $planets, $createdAt, $updatedAt],
         };

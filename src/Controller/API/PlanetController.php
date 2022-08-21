@@ -23,16 +23,16 @@ class PlanetController extends AbstractController
             $result[] = [
                 'id' => $planet->getId(),
                 'title' => $planet->getTitle(),
-                'image' => ($planet->getImageName()) ? $this->getParameter('app.planets.images.uri') . $planet->getImageName() : null,
+                'image' => ($planet->getImageName()) ? $this->getParameter('app.planets.images.uri').$planet->getImageName() : null,
                 'slug' => $planet->getSlug(),
                 'description' => $planet->getDescription(),
-                'api_link' => '/api/planets/' . $planet->getId()
+                'api_link' => '/api/planets/'.$planet->getId(),
             ];
         }
 
         return new JsonResponse([
             'status' => Response::HTTP_OK,
-            'planets' => $result
+            'planets' => $result,
         ]);
     }
 
@@ -45,15 +45,15 @@ class PlanetController extends AbstractController
         $result = [
             'id' => $planet->getId(),
             'title' => $planet->getTitle(),
-            'image' => ($planet->getImageName()) ? $this->getParameter('app.planets.images.uri') . $planet->getImageName() : null,
+            'image' => ($planet->getImageName()) ? $this->getParameter('app.planets.images.uri').$planet->getImageName() : null,
             'slug' => $planet->getSlug(),
             'description' => $planet->getDescription(),
-            "content" => $planet->getContent()
+            'content' => $planet->getContent(),
         ];
 
         return new JsonResponse([
             'status' => Response::HTTP_OK,
-            'planet' => $result
+            'planet' => $result,
         ]);
     }
 }

@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\API;
 
-use App\Entity\GalleryEntity;
-use App\Entity\Planet;
 use App\Interfaces\GalleryEntityInterface;
 use App\Interfaces\PlanetInterface;
 use App\Interfaces\StoneInterface;
-use App\Repository\PlanetRepository;
 use App\Repository\StoneRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -26,11 +23,13 @@ class StoneController extends AbstractController
         $stones = $stoneRepository->findAll();
 
         foreach ($stones as $stone) {
-            if (!$stone->isPublished()) continue;
+            if (!$stone->isPublished()) {
+                continue;
+            }
             $itemResult = [
                 'id' => $stone->getId(),
                 'title' => $stone->getTitle(),
-                'image' => ($stone->getImageName()) ? $this->getParameter('app.stones.images.uri') . $stone->getImageName() : null,
+                'image' => ($stone->getImageName()) ? $this->getParameter('app.stones.images.uri').$stone->getImageName() : null,
                 'slug' => $stone->getSlug(),
                 'description' => $stone->getDescription(),
                 'planet' => null,
@@ -49,7 +48,7 @@ class StoneController extends AbstractController
 
         return new JsonResponse([
             'status' => Response::HTTP_OK,
-            'planets' => $stonesResult
+            'planets' => $stonesResult,
         ]);
     }
 
@@ -62,10 +61,10 @@ class StoneController extends AbstractController
         $result = [
             'id' => $stone->getId(),
             'title' => $stone->getTitle(),
-            'image' => ($stone->getImageName()) ? $this->getParameter('app.stones.images.uri') . $stone->getImageName() : null,
+            'image' => ($stone->getImageName()) ? $this->getParameter('app.stones.images.uri').$stone->getImageName() : null,
             'slug' => $stone->getSlug(),
             'description' => $stone->getDescription(),
-            "content" => $stone->getContent()
+            'content' => $stone->getContent(),
         ];
 
         /** @var PlanetInterface $planet */
@@ -74,7 +73,7 @@ class StoneController extends AbstractController
             $result['planet'] = [
                 'id' => $planet->getId(),
                 'title' => $planet->getTitle(),
-                'api_link' => '/api/planets/' . $planet->getId()
+                'api_link' => '/api/planets/'.$planet->getId(),
             ];
         }
 
@@ -83,14 +82,14 @@ class StoneController extends AbstractController
             foreach ($gallery as $photo) {
                 $result['gallery'][] = [
                     'title' => $photo->getImageName(),
-                    'image' => $this->getParameter('app.stones.images.uri') . '/' . $photo->getImageName(),
+                    'image' => $this->getParameter('app.stones.images.uri').'/'.$photo->getImageName(),
                 ];
             }
         }
 
         return new JsonResponse([
             'status' => Response::HTTP_OK,
-            'planet' => $result
+            'planet' => $result,
         ]);
     }
 }

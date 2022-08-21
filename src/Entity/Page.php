@@ -6,11 +6,9 @@ namespace App\Entity;
 
 use App\Interfaces\HTMLPageInterface;
 use App\Interfaces\PageInterface;
-use App\Interfaces\PlanetInterface;
 use App\Interfaces\SectionInterface;
 use App\Repository\PageRepository;
 use App\Traits\HTMLPageTrait;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TimestampableInterface;
@@ -50,7 +48,6 @@ class Page implements PageInterface, HTMLPageInterface, TimestampableInterface
     }
 
     /**
-     * @param SectionInterface|null $section
      * @return Page
      */
     public function setSection(?SectionInterface $section): self
@@ -60,16 +57,12 @@ class Page implements PageInterface, HTMLPageInterface, TimestampableInterface
         return $this;
     }
 
-    /**
-     * @return Planet|null
-     */
     public function getPlanet(): ?Planet
     {
         return $this->planet;
     }
 
     /**
-     * @param Planet|null $planet
      * @return Page
      */
     public function setPlanet(?Planet $planet): self
@@ -84,9 +77,6 @@ class Page implements PageInterface, HTMLPageInterface, TimestampableInterface
         return $this->getTitle();
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
